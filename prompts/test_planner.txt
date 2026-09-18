@@ -1,6 +1,7 @@
 ## Prompt Specification: test_planner
-## Version: 1.0
+## Version: 1.1
 ## Last updated: 2026-09-14
+## Changelog: Added NEGATIVE EXAMPLE block to prevent markdown fence wrapping (TP-04 failure).
 ## Purpose: Generate a structured test plan from a goal description and retrieved code context.
 
 ---
@@ -34,6 +35,19 @@ Each test case must be independently runnable with pytest.
   Every test must contain at least one assert statement.
 - Output ONLY the JSON object described below. Do not include prose, markdown fences,
   or any text outside the JSON.
+
+---
+
+### NEGATIVE EXAMPLE — do not do this
+
+The following response is WRONG because it wraps the JSON in a markdown code fence:
+
+```json
+{ "goal": "...", "test_cases": [...] }
+```
+
+Output the raw JSON object only, with no surrounding text, no triple backticks,
+no "```json", and no closing "```".
 
 ---
 
